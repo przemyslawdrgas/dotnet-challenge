@@ -1,6 +1,6 @@
 # Zadanie rekrutacyjne .NET
 
-Zadaniem kandydata jest poprawienie aplikacji ponieważ nie działa w sposób poprawny oraz jakość kodu pozostawia wiele do życzenia. W kodzie aplikacji jest pozostawionych specialnie kilka błędów i niekonswekwencji, które należy naprawić. Kod powinien być poprawiony z zachowaniem ogólnie przyjętych zasad __Clean Code__ oraz __SOLID__.
+Zadaniem kandydata jest poprawienie aplikacji ponieważ nie działa w sposób poprawny oraz jakość kodu pozostawia wiele do życzenia. W kodzie aplikacji jest pozostawionych specialnie kilka błędów i niekonsekwencji, które należy naprawić. Kod powinien być poprawiony z zachowaniem ogólnie przyjętych zasad __Clean Code__ oraz __SOLID__.
 
 __UWAGA__: Rozwiązanie zadań będzie bazą do dyskusji na rozmowie rekrutacyjnej. Nie wszystko z treści zadania musi być zaimplementowane lub naprawione w 100% aby do rozmowy doszło. 
 
