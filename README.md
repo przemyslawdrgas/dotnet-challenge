@@ -2,10 +2,10 @@
 
 Zadaniem kandydata jest poprawienie aplikacji ponieważ nie działa w sposób poprawny oraz jakość kodu pozostawia wiele do życzenia. W kodzie aplikacji jest pozostawionych specialnie kilka błędów i nie konswekwencji, które należy naprawić. Kod powinien być poprawiony z zachowaniem ogólnie przyjętych zasad __Clean Code__ oraz __SOLID__.
 
-__UWAGA__: Rozwiązanie zadań będzie bazą do dyskusji na rozmowie rekrutachyjnej. Nie wszystko w treści zadania musi być zaimplementowane lub naprawione w 100% aby do rozmowy doszło. 
+__UWAGA__: Rozwiązanie zadań będzie bazą do dyskusji na rozmowie rekrutacyjnej. Nie wszystko z treści zadania musi być zaimplementowane lub naprawione w 100% aby do rozmowy doszło. 
 
 ##### Przesyłanie rozwiązań
-Repozytorium należy ściągnąć i umieścić na swoim indywidualnym repozytorium. Po zakończeniu implementacji link do repozytorium z rozwiązaniem należy nam wysłać.
+Repozytorium należy ściągnąć i umieścić na swoim indywidualnym repozytorium. Po zakończeniu implementacji link do repozytorium z rozwiązaniem należy przesłać osobie odpowiedzialną za rekrutację kandydata.
 
 # Opis zadania
 
@@ -31,18 +31,18 @@ Zasady processowania Job'ów:
    - Name jest wymagane i nie powinno być puste
    - Nie może być dwóch Job'ów o takiej samej nazwie
 2. Dodawanie Log'ów Job'a
-   - Dodanie Job'a powinno być logowane(Nowy wpis w tabeli Logs)
-   - Kazda zmiana Statusu Job'a powinna być logowana(Nowy wpis w tabeli Logs)
+   - Dodanie Job'a powinno być logowane(Nowy wpis w tabeli Logs z deskryptywnym opisem)
+   - Kazda zmiana Statusu Job'a powinna być logowana(Nowy wpis w tabeli Logs z deskryptywnym opisem)
 3. Dodanie pola 'LastUpdatedAt' do Job'a
-   - Pole powinno być typu DateTime
+   - Pole powinno być nullowalne typu DateTime
    - Powinna być tam data ostatniej zmiany Statusu Job'a 
 4. Widok szczegółów Job'a
-   - Uzytkownik powinien być tam przeniesiony po kliknięciu przycisku Details obok Job'a
+   - Uzytkownik powinien być tam przeniesiony po kliknięciu przycisku 'Details' obok Job'a
    - Widok powinien zawierać wszystkie informacje na temat Job'a razem z jego Logami
    - Logi powinny być posortowane po dacie utworzenia Log'a 	
 5. Posortowanie Job'ów
    - Job'y powinny być posortowane po dacie utworzenia
-6. Dodanie licznik niepowodzeń Job'a, oraz dodanie statusu 'Closed'
+6. Dodanie licznika niepowodzeń Job'a, oraz dodanie statusu 'Closed'
    - Jeśli Job się nie powiedzie, licznik nipowodzeń powinien się zwiększyć
    - Gdy licznik niepowodzeń osiągnie wartość 5, status Job'a powinien być zmieniony na 'Closed'
 7. Obsługa 'Do after'
