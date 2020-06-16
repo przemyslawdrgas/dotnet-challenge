@@ -1,60 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using ZavenDotNetInterview.App.Models;
-using ZavenDotNetInterview.App.Models.Context;
-using ZavenDotNetInterview.App.Repositories;
-using ZavenDotNetInterview.App.Services;
+using ZavenDotNetInterview.Entities.ViewModels;
+using ZavenDotNetInterview.Services;
 
 namespace ZavenDotNetInterview.App.Controllers
 {
+    [RoutePrefix("Tasks")]
     public class JobsController : Controller
     {
         private readonly IJobProcessorService _jobProcessorService;
-        public JobsController(IJobProcessorService jobProcessorService)
+        private readonly IJobService _jobService;
+        private readonly IJobValidatorService _jobValidatorService;
+        public JobsController(IJobProcessorService jobProcessorService, IJobService jobService, IJobValidatorService jobValidatorService)
         {
             _jobProcessorService = jobProcessorService;
+            _jobService = jobService;
+            _jobValidatorService = jobValidatorService;
         }
 
         // GET: Tasks
+        [HttpGet, Route("")]
         public ActionResult Index()
         {
-            using (ZavenDotNetInterviewContext _ctx = new ZavenDotNetInterviewContext())
-            {
-                JobsRepository jobsRepository = new JobsRepository(_ctx);
-                List<Job> jobs = jobsRepository.GetAllJobs();
-                return View(jobs);
-            }
+            var jobs = _jobService.GetJobsViewModel();
+            return View(jobs);
         }
 
         // POST: Tasks/Process
-        [HttpGet]
-        public ActionResult Process()
+        [HttpGet, Route("Process")]
+        public async Task<ActionResult> Process()
         {
-            _jobProcessorService.ProcessJobs();
+            await _jobProcessorService.ProcessJobs();
 
             return RedirectToAction("Index");
         }
 
         // GET: Tasks/Create
+        [HttpGet, Route("Create")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Tasks/Create
-        [HttpPost]
-        public ActionResult Create(string name, DateTime doAfter)
+        [HttpPost, Route("Create")]
+        public ActionResult Create(CreateJobViewModel model)
         {
             try
             {
-                using (ZavenDotNetInterviewContext _ctx = new ZavenDotNetInterviewContext())
+                if (ModelState.IsValid)
                 {
-                    Job newJob = new Job() { Id = Guid.NewGuid(), DoAfter = doAfter, Name = name, Status = JobStatus.New };
-                    newJob = _ctx.Jobs.Add(newJob);
-                    _ctx.SaveChanges();
+                    var errors = _jobValidatorService.ValidateJob(model);
+                    if (ResolveErrors(errors))
+                        return View(model);
+                    _jobService.CreateJob(model.Name, model.DoAfter);
+                }
+                else
+                {
+                    return View(model);
                 }
 
                 return RedirectToAction("Index");
@@ -65,9 +70,25 @@ namespace ZavenDotNetInterview.App.Controllers
             }
         }
 
+        [HttpGet, Route("Details")]
         public ActionResult Details(Guid jobId)
         {
-            return View();
+            JobViewModel job = _jobService.GetJobViewModel(jobId);
+            return View(job);
+        }
+
+        private bool ResolveErrors(Dictionary<string, string> errors)
+        {
+            if (errors.Count > 0)
+            {
+                foreach (var item in errors)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+
+                return true;
+            }
+            return false;
         }
     }
 }

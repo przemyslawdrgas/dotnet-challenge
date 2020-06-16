@@ -1,12 +1,24 @@
-﻿@*TODO: Use Razor Syntax*@
+﻿@using ZavenDotNetInterview.Resources
+@model ZavenDotNetInterview.Entities.ViewModels.CreateJobViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = Interface.CreateJob;
 }
 
-<h2>Create</h2>
-
-<form action="/Jobs/Create" method="post">
-    Name: <input type="text" name="Name" placeholder="Name" />
-    Do after: <input type="datetime" name="DoAfter" placeholder="RRRR-MM-DD" />
-    <input type="submit" value="Add Task" />
-</form>
+<div class="container">
+    <div class="center-block col-sm-10">
+        @using (Html.BeginForm("Create", "Tasks", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, @Html.DisplayNameFor(m => m.Name))
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = @Html.DisplayNameFor(m => m.Name) })
+                @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger " })
+                <br />
+                @Html.LabelFor(m => m.DoAfter, @Html.DisplayNameFor(m => m.DoAfter))
+                @Html.EditorFor(m => m.DoAfter, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.DoAfter, null, new { @class = "text-danger " })
+                <br />
+                <input type="submit" value="Add Task" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>

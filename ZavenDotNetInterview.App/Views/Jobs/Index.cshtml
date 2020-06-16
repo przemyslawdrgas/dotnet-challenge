@@ -1,35 +1,45 @@
-﻿@model List<ZavenDotNetInterview.App.Models.Job>
+﻿@using ZavenDotNetInterview.Resources
+@model ZavenDotNetInterview.Entities.ViewModels.AllJobsViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Interface.Home;
 }
 
-<h2>Index</h2>
+<div class="btn-group" role="group">
+    @Html.ActionLink(Interface.Create, "Create", "Tasks", null, new { @class = "btn btn-default" })
+    @Html.ActionLink(Interface.Process, "Process", "Tasks", null, new { @class = "btn btn-default" })
+</div>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName(Interface.CreateDate)
+            </th>
+            <th class="text-center">
+                @Html.DisplayName(Interface.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayName(Interface.Status)
+            </th>
+            <th class="text-center">
+                @Html.DisplayName(Interface.Action)
+            </th>
+        </tr>
+    </thead>
 
-@Html.ActionLink("Create", "Create")
-@Html.ActionLink("Process", "Process")
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Name")
-        </th>
-        <th>
-            @Html.DisplayName("Status")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var job in Model)
+    @foreach (var job in Model.Jobs)
     {
         <tr>
-            <td>
+            <td class="text-left">
+                @Html.DisplayFor(modelItem => job.CreatedAt)
+            </td>
+            <td class="text-left">
                 @Html.DisplayFor(modelItem => job.Name)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => job.Status)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.ActionLink("Details", "Details", new { jobId = job.Id })
             </td>
         </tr>

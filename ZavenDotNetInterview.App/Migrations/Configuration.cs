@@ -4,15 +4,16 @@
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using ZavenDotNetInterview.Data.Context;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ZavenDotNetInterview.App.Models.Context.ZavenDotNetInterviewContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ZavenDotNetInterviewContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ZavenDotNetInterview.App.Models.Context.ZavenDotNetInterviewContext context)
+        protected override void Seed(ZavenDotNetInterviewContext context)
         {
             //  This method will be called after migrating to the latest version.
 

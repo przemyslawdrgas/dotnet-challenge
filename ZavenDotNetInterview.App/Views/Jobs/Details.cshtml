@@ -1,7 +1,87 @@
-﻿@*TODO: Use Razor Syntax*@
+﻿@using ZavenDotNetInterview.Resources
+@model ZavenDotNetInterview.Entities.ViewModels.JobViewModel
+
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Interface.Details;
 }
 
-<h2>Details</h2>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName(Interface.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayName(Interface.Name)
+            </th>
+            <th>
+                @Html.DisplayName(Interface.Status)
+            </th>
+            <th>
+                @Html.DisplayName(Interface.LastUpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayName(Interface.DoAfter)
+            </th>
+            <th>
+                @Html.DisplayName(Interface.Attempts)
+            </th>
+        </tr>
+    </thead>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(m => m.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.LastUpdatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.DoAfter)
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Attempts)
+        </td>
+    </tr>
+
+</table>
+
+<h2>Logs</h2>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName(Interface.Id)
+            </th>
+            <th>
+                @Html.DisplayName(Interface.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayName(Interface.Description)
+            </th>
+        </tr>
+    </thead>
+    @foreach (var log in Model.Logs)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => log.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => log.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => log.Description)
+            </td>
+        </tr>
+    }
+
+</table>
 
